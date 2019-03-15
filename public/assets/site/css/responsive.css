@@ -1,0 +1,41 @@
+@media screen and (max-width: 479px) {
+    .actions-form{
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .rectangle {
+        border-width: 0 0 12px 200px;
+        margin-left: calc(50% - 200px);
+    }
+}
+@media screen and (max-width:768px) {
+    .actions-form{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .rectangle {
+        border-width: 0 0 12px 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+@media screen and (max-width: 989px) {
+    ul.menu li {
+        display: block;
+    }
+    .actions-form{
+        width: 500px;
+        margin-left: calc(50% - 250px);
+        margin-right: calc(50% - 250px);
+    }
+    .rectangle {
+        border-width: 0 0 12px 200px;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+@media screen and (max-width: 1200px) {
+
+}
