@@ -81,7 +81,17 @@ class PlaneController extends Controller
      */
     public function show($id)
     {
-        //
+        $plane = $this->plane->with('brand')->find($id);
+
+        if (!$plane) return redirect()->back();
+
+        $title = "Detalhes do avião: {$plane->id}";
+
+        $classes = $this->plane->classes();
+
+        $bred = "Edição da marca";
+
+        return view('panel.planes.show', compact('title','bred','plane', 'classes'));
     }
 
     /**
@@ -99,7 +109,7 @@ class PlaneController extends Controller
 
         $title = "Editar {$plane->id}";
 
-        $bred = "Edição da marca";
+        $bred = "Edição do avião";
 
         $classes = $this->plane->classes();
 
@@ -141,6 +151,29 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plane = $this->plane->find($id);
+
+        if (!$plane) return redirect()->back()->with('error', 'Falha ao deletar!');
+
+        $delete = $plane->delete();
+
+        return ($delete) ?
+        redirect()
+            ->route('planes.index')
+            ->with('success', 'Deletado com sucesso!'):
+        redirect()
+            ->back()
+            ->with('error', 'Falha ao deletar!');
+    }
+
+    public function search(Request $request)
+    {
+        $searchForm = $request->except(['_token']);
+
+        $planes = $this->plane->search($request->key_search, $this->totalPage);
+        
+        $title = "Resultado da pesquisa por: {$request->key_search}";
+
+        return view('panel.planes.index', compact('title','planes', 'searchForm'));
     }
 }
