@@ -25,7 +25,7 @@
     @if (isset($searchForm['key_search']))
         <div class="alert alert-info">
             <p>
-                <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                <a href="{{ route('states.index') }}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                 Resultado para <strong>{{ $searchForm['key_search'] }}</strong>
             </p>
         </div>

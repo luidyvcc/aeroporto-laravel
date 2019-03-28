@@ -36,6 +36,8 @@ class StateController extends Controller
         
         $title = "Resultado da pesquisa por: {$request->key_search}";
 
-        return view('panel.states.index', compact('title','states', 'searchForm'));
+        $bred = "Estados";
+
+        return view('panel.states.index', compact('title','states', 'searchForm', 'bred'));
     }
 }
