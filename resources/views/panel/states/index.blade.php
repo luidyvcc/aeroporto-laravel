@@ -3,12 +3,8 @@
 @section('content')
 
 <div class="bred">
-    <a href="{{ route('panel') }}" class="bred">
-        Home  >
-    </a>
-    <a href="{{ route('brands.index') }}" class="bred">
-        Marcas
-    </a>
+    <a href="{{ route('panel') }}" class="bred">Home  ></a>
+    <a href="{{ route('states.index') }}" class="bred">{{ $bred }}</a>
 </div>
 
 <div class="title-pg">
@@ -19,8 +15,8 @@
 <div class="content-din bg-white">    
 
     <div class="form-search">
-        {!! Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) !!}
-            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite aqui o nome da marca']) !!}
+        {!! Form::open(['route' => 'states.search', 'class' => 'form form-inline']) !!}
+            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite aqui o nome do estado']) !!}
 
             <button class="btn btn-search">Pesquisar</button>
         {!! Form::close() !!}
@@ -28,8 +24,10 @@
 
     @if (isset($searchForm['key_search']))
         <div class="alert alert-info">
-            <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-            <p>Resultado para <strong>{{ $searchForm['key_search'] }}</strong></p>
+            <p>
+                <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                Resultado para <strong>{{ $searchForm['key_search'] }}</strong>
+            </p>
         </div>
     @endif
 
@@ -38,7 +36,7 @@
     </div>
 
     <div class="class-btn-insert">
-        <a href="{{ route('brands.create') }}" class="btn-insert">
+        <a href="{{ route('planes.create') }}" class="btn-insert">
             <span class="glyphicon glyphicon-plus"></span>
             Cadastrar
         </a>
@@ -46,19 +44,20 @@
 
     <table class="table table-striped">
         <tr>
+            <th>Id</th>
             <th>Nome</th>
-            <th width="200">Ações</th>
+            <th>Iniciais</th>
+            <th width="150">Ações</th>
         </tr>
 
-        @forelse ($brands as $brand)
+        @forelse ($states as $state)
             <tr>
-                <td>{{ $brand->name }}</td>
+                <td>{{ $state->id }}</td>
+                <td>{{ $state->name }}</td>
+                <td>{{ $state->initials }}</td>
                 <td>
-                    <a href="{{ route('brands.edit', $brand->id) }}" class="edit">Edit</a>
-                    <a href="{{ route('brands.show', $brand->id) }}" class="delete">Detail</a>
-                    <a href="{{ route('brands.planes', $brand->id) }}" class="edit">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                    </a>
+                    <a href="{{ route('planes.edit', $state->id) }}" class="edit">Editar</a>
+                    <a href="{{ route('planes.show', $state->id) }}" class="show">Detalhes</a>
                 </td>
             </tr>            
         @empty
@@ -77,9 +76,9 @@
     Caso ela não exista, a paginação deve ser feita normalmente.
     --}}
     @if(isset($searchForm))
-        {!! $brands->appends($searchForm)->links() !!}
+        {!! $states->appends($searchForm)->links() !!}
     @else
-        {!! $brands->links() !!}
+        {!! $states->links() !!}
     @endif
 
 </div><!--Content Dinâmico-->

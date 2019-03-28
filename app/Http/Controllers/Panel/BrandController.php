@@ -99,7 +99,7 @@ class BrandController extends Controller
         if (!$brand) return redirect()->back();
 
         $title = "Editar {$brand->name}";
-        $bred = "Edição da marca";
+        $bred = "Editar";
 
         return view('panel.brands.form', compact('title', 'brand', 'bred'));
     }
@@ -162,6 +162,20 @@ class BrandController extends Controller
         $title = "Resultado da pesquisa por: {$request->key_search}";
 
         return view('panel.brands.index', compact('title','brands', 'searchForm'));
+    }
+
+    public function planes($id)
+    {
+        $brand = $this->brand->find($id);
+        if (!$brand) return redirect()->back()->with('error', 'Falha ao localizar aviões!');
+
+        $planes = $brand->planes()->get();
+
+        $title = "Aviões da marca '{$brand->name}'";
+
+        $bred = "Aviões";
+
+        return view('panel.brands.planes', compact('brand','planes','title','bred'));
     }
 
 }
