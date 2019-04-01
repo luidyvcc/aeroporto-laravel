@@ -4,7 +4,7 @@
 
 <div class="bred">
     <a href="{{ route('panel') }}" class="bred">Home  ></a>
-    <a href="{{ route('states.index') }}" class="bred">{{ $bred }}</a>
+    <a href="{{ route('planes.index') }}" class="bred">{{ $bred }}</a>
 </div>
 
 <div class="title-pg">
@@ -15,8 +15,8 @@
 <div class="content-din bg-white">    
 
     <div class="form-search">
-        {!! Form::open(['route' => 'states.search', 'class' => 'form form-inline']) !!}
-            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite aqui o nome do estado']) !!}
+        {!! Form::open(['route' => ['state.cities.search', $state->initials], 'class' => 'form form-inline']) !!}
+            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite aqui o nome da cidade']) !!}
 
             <button class="btn btn-search">Pesquisar</button>
         {!! Form::close() !!}
@@ -25,7 +25,7 @@
     @if (isset($searchForm['key_search']))
         <div class="alert alert-info">
             <p>
-                <a href="{{ route('states.index') }}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                 Resultado para <strong>{{ $searchForm['key_search'] }}</strong>
             </p>
         </div>
@@ -46,26 +46,18 @@
         <tr>
             <th>Id</th>
             <th>Nome</th>
-            <th>Iniciais</th>
-            <th width="200">Ações</th>
+            <th>CEP</th>
+            <th width="150">Ações</th>
         </tr>
 
-        @forelse ($states as $state)
+        @forelse ($cities as $city)
             <tr>
-                <td>{{ $state->id }}</td>
-                <td>{{ $state->name }}</td>
-                <td>{{ $state->initials }}</td>
+                <td>{{ $city->id }}</td>
+                <td>{{ $city->name }}</td>
+                <td>{{ $city->zip_code }}</td>
                 <td>
-                    {{-- <a href="{{ route('planes.edit', $state->id) }}" class="edit">
-                        Editar
-                    </a>
-                    <a href="{{ route('planes.show', $state->id) }}" class="show">
-                        Detalhes
-                    </a> --}}
-                    <a href="{{ route('state.cities', $state->initials) }}" class="show">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        Cidades
-                    </a>
+                    <a href="{{ route('planes.edit', $city->id) }}" class="edit">Editar</a>
+                    <a href="{{ route('planes.show', $city->id) }}" class="show">Detalhes</a>
                 </td>
             </tr>            
         @empty
@@ -84,9 +76,9 @@
     Caso ela não exista, a paginação deve ser feita normalmente.
     --}}
     @if(isset($searchForm))
-        {!! $states->appends($searchForm)->links() !!}
+        {!! $cities->appends($searchForm)->links() !!}
     @else
-        {!! $states->links() !!}
+        {!! $cities->links() !!}
     @endif
 
 </div><!--Content Dinâmico-->

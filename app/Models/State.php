@@ -14,4 +14,9 @@ class State extends Model
                     ->paginate($totalPage);
                     
     }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }
