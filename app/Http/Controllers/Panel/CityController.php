@@ -28,10 +28,9 @@ class CityController extends Controller
         $state = State::where('initials', $initials)->with('cities')->get()->first();
         if(!$state) return redirect()->back()->with('error', 'Erro ao localizar cidades!');
 
-        $title = "Listagem de cidades do estado {$state->name}";
+        $cities = $state->cities()->paginate($this->totalPage);
 
-        $cities = $this->city->with('state')->paginate($this->totalPage);
-
+        $title = "Cidades do estado {$state->name}";
         $bred = "Cidades";
 
         return view('panel.cities.index', compact('title', 'cities', 'bred', 'state'));
