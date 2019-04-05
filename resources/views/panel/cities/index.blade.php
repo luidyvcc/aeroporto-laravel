@@ -5,12 +5,12 @@
 <div class="bred">
     <a href="{{ route('panel') }}" class="bred">Home  ></a>
     <a href="{{ route('states.index') }}" class="bred">Estados  ></a>
-    <a href="{{ route('state.cities', $state->initials) }}" class="bred">{{ $state->name }}</a>
+    <a href="{{ route('state.cities', $state->initials) }}" class="bred">{{ $state->name }} ></a>
     <a href="#" class="bred">{{ $bred }}</a>
 </div>
 
 <div class="title-pg">
-    <h1 class="title-pg">{{ $title or 'Erro no titulo' }}</h1>
+    <h1 class="title-pg">{{ $title or 'Erro no titulo' }} ({{ $cities->count() }} de {{ $cities->total()}})</h1>
 </div>
 
 
@@ -27,7 +27,7 @@
     @if (isset($searchForm['key_search']))
         <div class="alert alert-info">
             <p>
-                <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                <a href="{{ route('state.cities', $state->initials) }}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                 Resultado para <strong>{{ $searchForm['key_search'] }}</strong>
             </p>
         </div>

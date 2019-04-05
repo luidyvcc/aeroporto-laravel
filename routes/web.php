@@ -15,13 +15,12 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::get('states/index', 'StateController@index')->name('states.index');
     Route::any('states/search', 'StateController@search')->name('states.search');
 
-    Route::post('state/{initials}/cities/search', 'CityController@search')->name('state.cities.search');
+    // Estado -> Cidade
+    Route::any('state/{initials}/cities/search', 'CityController@search')->name('state.cities.search');//Any recebe get ou post
     Route::get('state/{initials}/cities', 'CityController@index')->name('state.cities');
 
-
-    // Cidades
-    //Route::get('cities/index', 'CityController@index')->name('cities.index');
-    //Route::any('cities/search', 'CityController@search')->name('cities.search');// Any para paginação
+    // Voos
+    Route::resource('flights', 'FlightController');
 
     // Principal
     Route::get('/', 'PanelController@index')->name('panel');     

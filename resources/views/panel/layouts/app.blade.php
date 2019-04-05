@@ -53,6 +53,14 @@
 					Estados
 				</a>
 			</li>
+
+			<li>
+				<a href="{{ route('flights.index') }}">
+					<i class="fa fa-fighter-jet" aria-hidden="true"></i>
+					Voos
+				</a>
+			</li>
+
 			
 		</ul>
 	</div>

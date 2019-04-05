@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
     public function search($wordSearch, $totalPage = 10)
     {
         return $this->where('name', 'LIKE', "%{$wordSearch}%")
@@ -15,8 +19,9 @@ class State extends Model
                     
     }
 
-    public function cities()
+    public function searchCities($wordSearch, $totalPage = 10)
     {
-        return $this->hasMany(City::class);
+        return $this->cities()->where('name', 'LIKE', "%{$wordSearch}%")
+        ->paginate($totalPage);
     }
 }

@@ -4,17 +4,16 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\State;
+use App\Models\Flight;
 
-class CityController extends Controller
+class FlightController extends Controller
 {
-    private $city;
+    private $flight;
     private $totalPage;
 
-    public function __construct(City $city)
+    public function __construct(Flight $flight)
     {
-        $this->city = $city;
+        $this->flight = $flight;
         $this->totalPage = 4;
     }
 
@@ -23,17 +22,14 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($initials)
+    public function index()
     {
-        $state = State::where('initials', $initials)->get()->first();
-        if(!$state) return redirect()->back()->with('error', 'Erro ao localizar cidades!');
+        $title = 'Lista de Voos';
+        $bred = 'Voos';
 
-        $cities = $state->cities()->paginate($this->totalPage);
+        $flights = $this->flight->paginate($this->totalPage);
 
-        $title = "Cidades do estado {$state->name}";
-        $bred = "Cidades";
-
-        return view('panel.cities.index', compact('title', 'cities', 'bred', 'state'));
+        return view('panel.flights.index', compact('title','flights', 'bred'));
     }
 
     /**
@@ -100,21 +96,5 @@ class CityController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request, $initials)
-    {
-        $state = State::where('initials', $initials)->get()->first();
-        if(!$state) return redirect()->back()->with('error', 'Erro ao localizar cidades!');
-
-        $searchForm = $request->all();
-        $keySearch = $request->key_search;
-
-        $cities = $state->searchCities($request->key_search, $this->totalPage);
-
-        $title = "Busca por '{$keySearch}' nas cidades do estado: {$state->name}";
-        $bred = "Cidades";
-
-        return view('panel.cities.index', compact('title', 'cities', 'bred', 'state', 'searchForm'));
     }
 }
