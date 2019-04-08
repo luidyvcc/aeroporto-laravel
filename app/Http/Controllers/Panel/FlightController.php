@@ -58,7 +58,16 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $insert = $this->flight->storeFlight($request);
+
+        return ($insert) ?
+            redirect()
+                ->route('flights.index')
+                ->with('success', 'Cadastrado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao cadastrar!')
+                ->withInput();//Volta a pagina com as informações preenchidas
     }
 
     /**

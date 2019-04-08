@@ -48,7 +48,7 @@
 
 <div class="form-group">
     <label for="time_duration">Duração</label>
-    {!! Form::date
+    {!! Form::time
     (
         'time_duration', null,
         [
@@ -148,19 +148,6 @@
 </div>
 
 <div class="form-group">
-    <label for="total_plots">Total de parcelas</label>
-    {!! Form::number
-    (
-        'total_plots', null,
-        [
-            'class' => 'form-control',
-            'placeholder' => 'Total de parcelas'
-        ]
-    )
-    !!}
-</div>
-
-<div class="form-group">
     <label for="qty_stops">Nº de Paradas</label>
     {!! Form::number
     (
@@ -175,7 +162,7 @@
 
 <div class="form-group">
     <label for="descrition">Descrição</label>
-    {!! Form::number
+    {!! Form::text
     (
         'descrition', null,
         [
