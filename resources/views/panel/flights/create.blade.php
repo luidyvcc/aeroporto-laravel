@@ -16,7 +16,9 @@
 
     @include('panel.includes.errors')
 
-    {!! Form::open(['route' => 'flights.store', 'class' => 'form form-search form-ds']) !!} 
+    {!! Form::open(['route' => 'flights.store', 
+                    'class' => 'form form-search form-ds',
+                    'files' => true]) !!} 
         @include('panel.flights.form')
     {!! Form::close() !!}
 

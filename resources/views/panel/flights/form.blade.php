@@ -2,7 +2,7 @@
     <label for="plane_id">Avião</label>
     {!! Form::select
     (
-        'plane_id', $planes, 0,
+        'plane_id', $planes, null,
         [
             'class' => 'form-control'
         ]
@@ -10,36 +10,136 @@
     !!}
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
+<div class="form-group">
+    <label for="origin">Origem</label>
+    {!! Form::select
+    (
+        'origin', $airports, null,
+        [
+            'class' => 'form-control'
+        ]
+    )
+    !!}
+</div>
 
 <div class="form-group">
-    <label for="qty_passengers">Quantidade de passegeiros</label>
-    {!! Form::number
+    <label for="destination">Destino</label>
+    {!! Form::select
     (
-        'qty_passengers', null,
+        'destination', $airports, null,
+        [
+            'class' => 'form-control'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="date">data</label>
+    {!! Form::date
+    (
+        'date', null,
+        [
+            'class' => 'form-control'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="time_duration">Duração</label>
+    {!! Form::date
+    (
+        'time_duration', null,
+        [
+            'class' => 'form-control'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="hour_output">Horario saída</label>
+    {!! Form::time
+    (
+        'hour_output', null,
         [
             'class' => 'form-control',
-            'placeholder' => 'Quantidade de passageiros'
+            'placeholder' => 'Horario saída'
         ]
     )
     !!}
 </div>
 
 <div class="form-group">
-    <label for="class">Classe</label>
-    {!! Form::select
+    <label for="arrival_time">Horario chegada</label>
+    {!! Form::time
     (
-        'class', $classes, 0,
+        'arrival_time', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Horario chegada'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="old_price">Preço anterior</label>
+    {!! Form::text
+    (
+        'old_price', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Preço anterior'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="price">Preço</label>
+    {!! Form::text
+    (
+        'price', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Preço'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="total_plots">Total de parcelas</label>
+    {!! Form::number
+    (
+        'total_plots', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Total de parcelas'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    {!! Form::checkbox
+    (
+        'is_promotion', null, null,
+        [
+            'id' => 'is_promotion'
+        ]
+    )
+    !!}
+    <label for="is_promotion">É promoção?</label>
+</div>
+
+<div class="form-group">
+    <label for="image">Foto</label>
+    {!! Form::file
+    (
+        'image', 
         [
             'class' => 'form-control'
         ]
@@ -48,16 +148,44 @@
 </div>
 
 <div class="form-group">
-    <label for="brand_id">Marca</label>
-    {!! Form::select
+    <label for="total_plots">Total de parcelas</label>
+    {!! Form::number
     (
-        'brand_id', $brands, 0,
+        'total_plots', null,
         [
-            'class' => 'form-control'
+            'class' => 'form-control',
+            'placeholder' => 'Total de parcelas'
         ]
     )
     !!}
 </div>
+
+<div class="form-group">
+    <label for="qty_stops">Nº de Paradas</label>
+    {!! Form::number
+    (
+        'qty_stops', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Nº de Paradas'
+        ]
+    )
+    !!}
+</div>
+
+<div class="form-group">
+    <label for="descrition">Descrição</label>
+    {!! Form::number
+    (
+        'descrition', null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Descrição'
+        ]
+    )
+    !!}
+</div>
+
 
 <div class="form-group">
     <button class="btn btn-success">Ok</button>
