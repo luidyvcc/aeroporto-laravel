@@ -29,7 +29,7 @@ class FlightController extends Controller
         $title = 'Lista de Voos';
         $bred = 'Voos';
 
-        $flights = $this->flight->paginate($this->totalPage);
+        $flights = $this->flight->getItems($this->totalPage);
 
         return view('panel.flights.index', compact('title','flights', 'bred'));
     }

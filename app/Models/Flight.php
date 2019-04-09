@@ -24,6 +24,11 @@ class Flight extends Model
        'descrition',
     ];
 
+    public function getItems($totalPage = 10)
+    {
+        return $this->with(['origin','destination'])->paginate($totalPage);
+    }
+
     public function storeFlight(Request $request)
     {
         $data = $request->all();
@@ -32,5 +37,15 @@ class Flight extends Model
         $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
 
         return $this->create($data);
+    }
+
+    public function origin()
+    {
+        return $this->belongsTo(Airport::class, 'airport_origin_id');
+    }
+
+    public function destination()
+    {
+        return $this->belongsTo(Airport::class, 'airport_destination_id');
     }
 }
