@@ -32,11 +32,21 @@ class Flight extends Model
     public function storeFlight(Request $request)
     {
         $data = $request->all();
-        $data['airport_origin_id'] = $request['origin'];
-        $data['airport_destination_id'] = $request['destination'];
+        // $data['airport_origin_id'] = $request['origin'];
+        // $data['airport_destination_id'] = $request['destination'];
         $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
 
         return $this->create($data);
+    }
+
+    public function updateFlight(Request $request)
+    {
+        $data = $request->all();
+        // $data['airport_origin_id'] = $request['origin'];
+        // $data['airport_destination_id'] = $request['destination'];
+        $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
+
+        return $this->update($data);
     }
 
     public function origin()

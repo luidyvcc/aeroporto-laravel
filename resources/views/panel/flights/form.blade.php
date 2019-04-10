@@ -11,10 +11,10 @@
 </div>
 
 <div class="form-group">
-    <label for="origin">Origem</label>
+    <label for="airport_origin_id">Origem</label>
     {!! Form::select
     (
-        'origin', $airports, null,
+        'airport_origin_id', $airports, null,
         [
             'class' => 'form-control'
         ]
@@ -23,10 +23,10 @@
 </div>
 
 <div class="form-group">
-    <label for="destination">Destino</label>
+    <label for="airport_destination_id">Destino</label>
     {!! Form::select
     (
-        'destination', $airports, null,
+        'airport_destination_id', $airports, null,
         [
             'class' => 'form-control'
         ]
