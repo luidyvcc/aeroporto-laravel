@@ -78,7 +78,14 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-        //
+        $flight = $this->flight->with(['origin','destination'])->find($id);
+        if(!$flight) return redirect()->back()->with('error', 'Falha ao atualizar!');
+
+        $title = "Voo {$flight->id}";
+        $bred = "Detalhes";
+
+        return view('panel.flights.show', compact('flight', 'title', 'bred'));
+
     }
 
     /**
@@ -132,6 +139,17 @@ class FlightController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $flight = $this->flight->find($id);
+        if (!$flight) return redirect()->back()->with('error', 'Falha ao deletar!');
+
+        $delete = $flight->delete();
+
+        return ($delete) ?
+            redirect()
+                ->route('flights.index')
+                ->with('success', 'Deletado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao deletar!');
     }
 }
