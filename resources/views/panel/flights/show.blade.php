@@ -20,67 +20,33 @@
 
     <ul>
         <li>Id: <strong>{{ $flight->id }}</strong></li>
-    </ul>
-
-    <ul>
+    
         <li>Avião: <strong>{{ $flight->plane_id }}</strong></li>
-    </ul>
-
-
-    <ul>
+    
         <li>Origem: <strong>{{ $flight->origin->name }}</strong></li>
-    </ul>
-
-
-    <ul>
+    
         <li>Destino: <strong>{{ $flight->destination->name }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Data: <strong>{{ $flight->date }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Duração: <strong>{{ $flight->time_duration }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Horario saída: <strong>{{ $flight->hour_output }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Horario chegada: <strong>{{ $flight->arrival_time }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Preço anterior: <strong>{{ $flight->old_price }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Preço: <strong>{{ $flight->price }}</strong></li>
-    </ul>
-
-    <ul>
+    
+        <li>Data: <strong>{{ formatDate($flight->date) }}</strong></li>
+    
+        <li>Duração: <strong>{{ formatTime($flight->time_duration) }}</strong></li>
+    
+        <li>Horario saída: <strong>{{ formatTime($flight->hour_output) }}</strong></li>
+    
+        <li>Horario chegada: <strong>{{ formatTime($flight->arrival_time) }}</strong></li>
+    
+        <li>Preço anterior: <strong>{{ formatPrice($flight->old_price) }}</strong></li>
+    
+        <li>Preço: <strong>{{ formatPrice($flight->price) }}</strong></li>
+    
         <li>Total de parcelas: <strong>{{ $flight->total_plots }}</strong></li>
-    </ul>
+   
+        <li>É promoção? <strong>{{ $flight->is_promotion ? 'Sim' : 'Não'}}</strong></li>
 
-    <ul>
-        <li>Preço: <strong>{{ $flight->price }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>É promoção? <strong>{{ $flight->is_promotion }}</strong></li>
-    </ul>
-
-    <ul>
-        <li>Foto: <strong>{{ $flight->image }}</strong></li>
-    </ul>
-
-    <ul>
+        <li>Foto: <img src="{{ $flight->image }}" alt="Imagem do voo" width="35"></li>
+    
         <li>Nº de Paradas: <strong>{{ $flight->qty_stops }}</strong></li>
-    </ul>
-
-    <ul>
+    
         <li>Descrição: <strong>{{ $flight->descrition }}</strong></li>
     </ul>
 

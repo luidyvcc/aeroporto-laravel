@@ -65,8 +65,8 @@
                     <a href="">{{ $flight->destination->name }}</a>
                 </td>
                 <td>{{ $flight->qty_stops }}</td>
-                <td>{{ $flight->date }}</td>
-                <td>{{ $flight->hour_output }}</td>
+                <td>{{ formatDate($flight->date) }}</td>
+                <td>{{ formatTime($flight->hour_output) }}</td>
                 <td>
                     <a href="{{ route('flights.edit', $flight->id) }}" class="edit">Editar</a>
                     <a href="{{ route('flights.show', $flight->id) }}" class="delete">Detalhes</a>
