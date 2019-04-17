@@ -162,7 +162,7 @@
 
 <div class="form-group">
     <label for="descrition">Descrição</label>
-    {!! Form::text
+    {!! Form::textarea
     (
         'descrition', null,
         [
