@@ -60,15 +60,19 @@ class FlightController extends Controller
     {
         if ( $request->hasFile('image') && $request->file('image')->isValid() ) {
             
-            $fileName = uniqid(date('HisYmd'));
-            $extension = $request->image->extension();
-            $newNameFile = "{$fileName}.{$extension}";
+            $nameFile = uniqid(date('HisYmd')).".".$request->image->extension();
 
-            $request->image->storeAs('flights', $newNameFile);
+            if ( !$request->image->storeAs('flights', $nameFile) ) {
+                redirect()
+                ->back()
+                ->with('error', 'Falha no upload!')
+                ->withInput();
+            } 
+        } else {
+            $nameFile = "";
         }
 
-
-        $insert = $this->flight->storeFlight($request);
+        $insert = $this->flight->storeFlight($request, $nameFile);
 
         return ($insert) ?
             redirect()
