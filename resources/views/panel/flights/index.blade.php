@@ -47,6 +47,7 @@
     <table class="table table-striped">
         <tr>
             <th>Id</th>
+            <th>Imagem</th>
             <th>Origem</th>
             <th>Destino</th>
             <th>Paradas</th>
@@ -58,19 +59,34 @@
         @forelse ($flights as $flight)
             <tr>
                 <td>{{ $flight->id }}</td>
+
+                <td>
+                    @if ( $flight->image )
+                        <img src="{{ url("storage/flights/{$flight->image}") }}" alt="{{ $flight->id }}" style="max-width: 60px;">
+                    @else
+                        <img src="{{ url("assets/panel/imgs/no-image.jpg") }}" alt="{{ $flight->id }}" style="max-width: 60px;">
+                    @endif
+                </td>
+
                 <td>
                     <a href="">{{ $flight->origin->name }}</a>
                 </td>
+
                 <td>
                     <a href="">{{ $flight->destination->name }}</a>
                 </td>
+
                 <td>{{ $flight->qty_stops }}</td>
+
                 <td>{{ formatDate($flight->date) }}</td>
+
                 <td>{{ formatTime($flight->hour_output) }}</td>
+
                 <td>
                     <a href="{{ route('flights.edit', $flight->id) }}" class="edit">Editar</a>
                     <a href="{{ route('flights.show', $flight->id) }}" class="delete">Detalhes</a>
                 </td>
+
             </tr>            
         @empty
             <tr>

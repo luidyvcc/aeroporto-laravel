@@ -58,6 +58,7 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
+
         if ( $request->hasFile('image') && $request->file('image')->isValid() ) {
             
             $nameFile = uniqid(date('HisYmd')).".".$request->image->extension();
