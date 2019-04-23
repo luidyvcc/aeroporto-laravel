@@ -41,12 +41,13 @@ class Flight extends Model
         return $this->create($data);
     }
 
-    public function updateFlight(Request $request)
+    public function updateFlight(Request $request, $nameFile = "")
     {
         $data = $request->all();
         // $data['airport_origin_id'] = $request['origin'];
         // $data['airport_destination_id'] = $request['destination'];
         $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
+        $data['image'] = $nameFile;
 
         return $this->update($data);
     }
