@@ -18,8 +18,9 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     // Estado -> Cidade
     Route::any('state/{initials}/cities/search', 'CityController@search')->name('state.cities.search');//Any recebe get ou post
     Route::get('state/{initials}/cities', 'CityController@index')->name('state.cities');
-
+    
     // Voos
+    Route::any('flights/search', 'FlightController@search')->name('flights.search');//Any recebe get ou post
     Route::resource('flights', 'FlightController');
 
     // Principal

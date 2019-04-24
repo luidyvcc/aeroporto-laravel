@@ -182,4 +182,17 @@ class FlightController extends Controller
                 ->back()
                 ->with('error', 'Falha ao deletar!');
     }
+
+    public function search(Request $request)
+    {
+        $flights = $this->flight->search($request, $this->totalPage);
+        
+        $title = "Resultado da pesquisa";
+
+        $bred = "";
+
+        $searchForm = $request->except(['_token']);
+
+        return view('panel.flights.index', compact('title', 'flights', 'bred', 'searchForm'));
+    }
 }
