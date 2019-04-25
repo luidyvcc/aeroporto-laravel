@@ -69,6 +69,8 @@ class Flight extends Model
             if ($request->date) $query->where('date', '>=', $request->date);
             if ($request->hour_output) $query->where('hour_output', $request->hour_output);
             if ($request->total_stops) $query->where('qty_stops', $request->total_stops);
+            if ($request->origin) $query->where('airport_origin_id', $request->origin);
+            if ($request->destination) $query->where('airport_destination_id', $request->destination);
         })->paginate($totalPage);
 
         return $flights;

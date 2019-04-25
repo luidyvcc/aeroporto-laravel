@@ -27,11 +27,15 @@ class FlightController extends Controller
     public function index()
     {
         $title = 'Lista de Voos';
+
         $bred = 'Voos';
 
         $flights = $this->flight->getItems($this->totalPage);
 
-        return view('panel.flights.index', compact('title','flights', 'bred'));
+        $airports = Airport::pluck('name', 'id');
+        $airports->prepend('Aeroporto', '');
+
+        return view('panel.flights.index', compact('title', 'flights', 'bred', 'airports'));
     }
 
     /**
@@ -193,6 +197,9 @@ class FlightController extends Controller
 
         $searchForm = $request->except(['_token']);
 
-        return view('panel.flights.index', compact('title', 'flights', 'bred', 'searchForm'));
+        $airports = Airport::pluck('name', 'id');
+        $airports->prepend('Aeroporto', '');
+
+        return view('panel.flights.index', compact('title', 'flights', 'bred', 'searchForm', 'airports'));
     }
 }
