@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Panel;
 
+use App\Http\Requests\FlightStoreUpdateFormRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
@@ -57,10 +58,10 @@ class FlightController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FlightStoreUpdateFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FlightStoreUpdateFormRequest $request)
     {
 
         if ( $request->hasFile('image') && $request->file('image')->isValid() ) {
@@ -130,11 +131,11 @@ class FlightController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FlightStoreUpdateFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FlightStoreUpdateFormRequest $request, $id)
     {
         $flight = $this->flight->find($id);
         if(!$flight) return redirect()->back()->with('error', 'Falha ao atualizar!');
@@ -187,7 +188,7 @@ class FlightController extends Controller
                 ->with('error', 'Falha ao deletar!');
     }
 
-    public function search(Request $request)
+    public function search(FlightStoreUpdateFormRequest $request)
     {
         $flights = $this->flight->search($request, $this->totalPage);
         
