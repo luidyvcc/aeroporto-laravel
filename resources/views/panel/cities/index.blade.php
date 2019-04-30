@@ -57,9 +57,11 @@
                 <td>{{ $city->id }}</td>
                 <td>{{ $city->name }}</td>
                 <td>{{ $city->zip_code }}</td>
-                <td>
-                    <a href="{{ route('planes.edit', $city->id) }}" class="edit">Editar</a>
-                    <a href="{{ route('planes.show', $city->id) }}" class="show">Detalhes</a>
+                <td>                    
+                    <a href="{{ route('airports.index', $city->id) }}" class="edit">
+                        <i class="fa fa-thumb-tack" arial-hidden="true"></i>
+                        Aeroportos
+                    </a>
                 </td>
             </tr>            
         @empty
