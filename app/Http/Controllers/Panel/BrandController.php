@@ -17,6 +17,7 @@ class BrandController extends Controller
         $this->brand = $brand;
         $this->totalPage = 4;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,7 +77,7 @@ class BrandController extends Controller
     {
         // Busca a marca pelo id enviado por parametro
         $brand = $this->brand->find($id);
-        // Se a consulta não retornar nenhum objeto, volte de onde veio
+        // Se a consulta nao retornar nenhum objeto, volte de onde veio
         if (!$brand) return redirect()->back();
 
         $title = "Detalhes da marca {$brand->name}";
@@ -95,7 +96,7 @@ class BrandController extends Controller
     {
         // Busca a marca pelo id enviado por parametro
         $brand = $this->brand->find($id);
-        // Se a consulta não retornar nenhum objeto, volte de onde veio
+        // Se a consulta nao retornar nenhum objeto, volte de onde veio
         if (!$brand) return redirect()->back();
 
         $title = "Editar {$brand->name}";
@@ -115,7 +116,7 @@ class BrandController extends Controller
     {
         // Busca a marca pelo id enviado por parametro
         $brand = $this->brand->find($id);
-        // Se a consulta não retornar nenhum objeto, volte de onde veio
+        // Se a consulta nao retornar nenhum objeto, volte de onde veio
         if (!$brand) return redirect()->back();
 
         $update = $brand->update($request->all());
@@ -139,7 +140,7 @@ class BrandController extends Controller
     {
         // Busca a marca pelo id enviado por parametro
         $brand = $this->brand->find($id);
-        // Se a consulta não retornar nenhum objeto, volte de onde veio
+        // Se a consulta nao retornar nenhum objeto, volte de onde veio
         if (!$brand) return redirect()->back()->with('error', 'Falha ao deletar!');
 
         $delete = $brand->delete();
