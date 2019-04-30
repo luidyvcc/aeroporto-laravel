@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class Flight extends Model
 {
+
+    protected $casts = [
+        'is_promotion' => 'boolean'
+    ]; // Isso garante que o campo sera do tipo setado
+
     protected $fillable = [
        'plane_id',
        'airport_origin_id',
@@ -35,7 +40,7 @@ class Flight extends Model
         $data = $request->all();
         // $data['airport_origin_id'] = $request['origin'];
         // $data['airport_destination_id'] = $request['destination'];
-        $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
+        //$data['is_promotion'] = $request['is_promotion']=='on'?1:0;
         $data['image'] = $nameFile;
 
         return $this->create($data);

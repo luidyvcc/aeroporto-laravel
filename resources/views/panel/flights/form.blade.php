@@ -126,7 +126,7 @@
 <div class="form-group">
     {!! Form::checkbox
     (
-        'is_promotion', null, null,
+        'is_promotion', true, null,
         [
             'id' => 'is_promotion'
         ]
