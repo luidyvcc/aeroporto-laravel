@@ -45,6 +45,7 @@ class AirportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function create($cityId)
     {
         $city = $this->city->find($cityId);
@@ -57,6 +58,11 @@ class AirportController extends Controller
         $bred = 'Cadastro';
 
         return view('panel.airports.create', compact('title', 'bred', 'city', 'cities'));
+=======
+    public function create()
+    {
+        //
+>>>>>>> 81e384e83f722fe3428cbd76604c778c1b0bedc5
     }
 
     /**
