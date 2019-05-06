@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Panel;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AirportStoreUpdateFormRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Airport;
 use App\Models\City;
@@ -45,7 +45,6 @@ class AirportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function create($cityId)
     {
         $city = $this->city->find($cityId);
@@ -58,22 +57,30 @@ class AirportController extends Controller
         $bred = 'Cadastro';
 
         return view('panel.airports.create', compact('title', 'bred', 'city', 'cities'));
-=======
-    public function create()
-    {
-        //
->>>>>>> 81e384e83f722fe3428cbd76604c778c1b0bedc5
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\AirportStoreUpdateFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AirportStoreUpdateFormRequest $request, $cityId)
     {
-        //
+        $city = $this->city->find($cityId);
+        if (!$city) return redirect()->back()->with('error', 'Falha ao buscar cidade!');
+
+        $dataForm = $request->except('_token');
+
+        $insert = $this->airport->create($dataForm);
+
+        return ($insert) ?
+            redirect()
+                ->route('airports.index', $dataForm['city_id'])
+                ->with('success', 'Cadastrado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao cadastrar!');
     }
 
     /**
@@ -101,11 +108,11 @@ class AirportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\AirportStoreUpdateFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AirportStoreUpdateFormRequest $request, $id)
     {
         //
     }

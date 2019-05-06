@@ -1,8 +1,8 @@
 <div class="form-group">
-    <label for="cidy_id">Cidades</label>
+    <label for="city_id">Cidades</label>
     {!! Form::select
     (
-        'cidy_id', $cities, $city->id,
+        'city_id', $cities, $city->id,
         [
             'class' => 'form-control'
         ]
