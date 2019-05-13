@@ -3,12 +3,10 @@
 @section('content')
 
 <div class="bred">
-    <a href="{{ route('panel') }}" class="bred"> 
-        Home  >
-    </a>
-    <a href="{{ route('airports.index', $city->id) }}" class="bred">
-        {{ $bred }}
-    </a>
+    <a href="{{ route('panel') }}" class="bred">Home  ></a>
+    <a href="{{ route('states.index') }}" class="bred">Estados  ></a>
+    <a href="{{ route('state.cities', $city->state->initials) }}" class="bred">Cidades de {{ $city->state->name }} ></a>
+    <a href="{{ route('airports.index', $city->id) }}" class="bred">{{ $bred }}</a>
 </div>
 
 <div class="title-pg">

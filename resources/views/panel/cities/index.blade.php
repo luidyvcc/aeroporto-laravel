@@ -5,8 +5,7 @@
 <div class="bred">
     <a href="{{ route('panel') }}" class="bred">Home  ></a>
     <a href="{{ route('states.index') }}" class="bred">Estados  ></a>
-    <a href="{{ route('state.cities', $state->initials) }}" class="bred">{{ $state->name }} ></a>
-    <a href="#" class="bred">{{ $bred }}</a>
+    <a href="{{ route('state.cities', $state->initials) }}" class="bred">{{ $bred }}</a>
 </div>
 
 <div class="title-pg">

@@ -35,7 +35,7 @@ class AirportController extends Controller
 
         $title = "Lista de aeroportos de {$city->name}";
 
-        $bred = "Aeroportos";
+        $bred = "Aeroportos de {$city->name}";
 
         return view('panel.airports.index', compact('city', 'title', 'bred', 'airports'));
     }
@@ -54,7 +54,7 @@ class AirportController extends Controller
 
         $title = 'Novo aeroporto';
 
-        $bred = 'Cadastro';
+        $bred = 'Cadastro de aeroporto';
 
         return view('panel.airports.create', compact('title', 'bred', 'city', 'cities'));
     }
@@ -91,7 +91,7 @@ class AirportController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -100,9 +100,20 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($cityId, $id)
     {
-        //
+        $airport = $this->airport->with('city')->find($id);
+        if (!$airport) return redirect()->back()->with('error', 'Falha ao buscar aeroporto!');
+
+        $city = $airport->city;
+
+        $cities = $this->city->pluck('name', 'id');
+
+        $title = "Editar aeroporto '{$airport->name}'";
+
+        $bred = "Edição de aeroporto";
+
+        return view('panel.airports.edit', compact('airport', 'city', 'cities', 'title', 'bred'));
     }
 
     /**
@@ -112,9 +123,20 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AirportStoreUpdateFormRequest $request, $id)
+    public function update(AirportStoreUpdateFormRequest $request, $cityId, $id)
     {
-        //
+        $airport = $this->airport->find($id);
+        if (!$airport) return redirect()->back()->with('error', 'Falha ao buscar aeroporto!');
+
+        $update = $airport->update($request->all());
+
+        return ($update) ?
+            redirect()
+                ->route('airports.index', $cityId)
+                ->with('success', 'Atualizado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao atualizar!');
     }
 
     /**

@@ -31,7 +31,7 @@ class CityController extends Controller
         $cities = $state->cities()->paginate($this->totalPage);
 
         $title = "Cidades do estado {$state->name}";
-        $bred = "Cidades";
+        $bred = "Cidades do {$state->name}";
 
         return view('panel.cities.index', compact('title', 'cities', 'bred', 'state'));
     }
