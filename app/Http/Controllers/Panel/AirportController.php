@@ -89,9 +89,18 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($city_id, $id)
     {
-        
+        $airport = Airport::where('id', $id)->get()->first();
+        if(!$airport) return redirect()->back()->with('error', 'Erro ao localizar aeroporto!');
+
+        $city = $this->city->find($city_id);
+        if (!$city) return redirect()->back()->with('error', 'Falha ao buscar cidade!');
+
+        $title = "Detalhes";
+        $bred = "Detalhes do aeroporto '{$airport->name}'";
+
+        return view('panel.airports.show', compact('title', 'bred', 'city', 'airport'));
     }
 
     /**
@@ -144,9 +153,20 @@ class AirportController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    */
+    public function destroy($cityId, $id)
     {
-        //
+        $airport = $this->airport->find($id);
+        if (!$airport) return redirect()->back()->with('error', 'Falha ao buscar aeroporto!');
+
+        $delete = $airport->delete();
+
+        return ($delete) ?
+            redirect()
+                ->route('airports.index', $cityId)
+                ->with('success', 'Deletado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao deletar!');
     }
 }

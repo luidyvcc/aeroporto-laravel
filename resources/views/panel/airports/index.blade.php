@@ -55,7 +55,7 @@
                 <td>{{ $airport->address }}</td>
                 <td>
                     <a href="{{ route('airports.edit', [$city->id, $airport->id]) }}" class="edit">Edit</a>
-                    <a href="{{ route('airports.show', [$city->id, $airport->id]) }}" class="delete">Detail</a>
+                    <a href="{{ route('airports.show', [$city->id, $airport->id]) }}" class="edit">Detalher</a>
                 </td>
             </tr>            
         @empty
