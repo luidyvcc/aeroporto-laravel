@@ -14,20 +14,26 @@
 </div>
 
 
-<div class="content-din bg-white">    
+<div class="content-din bg-white">  
 
     <div class="form-search">
-        {!! Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) !!}
-            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite aqui o nome da marca']) !!}
-
+        {!! Form::open(['route' => ['city.airports.search', $city->id], 'class' => 'form form-inline']) !!}
+            {!! Form::number('code', null, ['class' => 'form-control', 'placeholder' => 'Código']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome']) !!}
+            {!! Form::text('zip_code', null, ['class' => 'form-control', 'placeholder' => 'CEP']) !!}
+            {!! Form::select('city_id', $cities, $city->id, ['class' => 'form-control']) !!}
             <button class="btn btn-search">Pesquisar</button>
         {!! Form::close() !!}
     </div>
 
-    @if (isset($searchForm['key_search']))
+    @if (isset($searchForm))
         <div class="alert alert-info">
-            <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-            <p>Resultado para <strong>{{ $searchForm['key_search'] }}</strong></p>
+            <p>
+                <a href="{{ route('airports.index', $city->id) }}">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </a>
+                Resultado da pesquisa   
+            </p>
         </div>
     @endif
 

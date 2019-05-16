@@ -15,12 +15,14 @@ class CreateAirportsTable extends Migration
     {
         Schema::create('airports', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')
                 ->references('id')
                 ->on('cities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+                
             $table->string('name', 150);
             $table->string('latitude', 15)->nullable();
             $table->string('longitude', 15)->nullable();

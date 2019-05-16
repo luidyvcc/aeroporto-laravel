@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Requests\AirportStoreUpdateFormRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Airport;
 use App\Models\City;
@@ -33,11 +34,14 @@ class AirportController extends Controller
         $airports = $city->airports()->paginate($this->totalPage);
         if (!$city) return redirect()->back()->with('error', 'Falha ao buscar aeroporto!');
 
+        $cities = $this->city->where('state_id', $city->state_id);
+        $cities = $cities->pluck('name', 'id');
+
         $title = "Lista de aeroportos de {$city->name}";
 
         $bred = "Aeroportos de {$city->name}";
 
-        return view('panel.airports.index', compact('city', 'title', 'bred', 'airports'));
+        return view('panel.airports.index', compact('city', 'title', 'bred', 'airports', 'cities'));
     }
 
     /**
@@ -168,5 +172,24 @@ class AirportController extends Controller
             redirect()
                 ->back()
                 ->with('error', 'Falha ao deletar!');
+    }
+
+    public function search(Request $request)
+    {
+        $searchForm = $request->except(['_token']);
+
+        $airports = $this->airport->search($request, $this->totalPage);
+
+        $city = $this->city->find($request->city_id);
+        if (!$city) return redirect()->back()->with('error', 'Falha ao buscar cidade!');
+
+        $cities = $this->city->where('state_id', $city->state_id);
+        $cities = $cities->pluck('name', 'id');
+
+        $bred = "Aeroportos de {$city->name}";
+        
+        $title = "Resultado da pesquisa";
+
+        return view('panel.airports.index', compact('title','airports','city' ,'cities' ,'bred' ,'searchForm'));
     }
 }

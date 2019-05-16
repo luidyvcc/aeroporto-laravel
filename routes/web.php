@@ -27,6 +27,7 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::get('/', 'PanelController@index')->name('panel'); 
     
     // Aeroportos
+    Route::any('city/{id}/airports/search', 'AirportController@search')->name('city.airports.search');
     Route::resource('city/{id}/airports', 'AirportController');
 });
 
