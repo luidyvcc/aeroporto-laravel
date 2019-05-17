@@ -34,6 +34,13 @@
 			</li>
 
 			<li>
+				<a href="{{ route('users.index') }}">
+					<i class="fa fa-users" aria-hidden="true"></i>
+					Usuários
+				</a>
+			</li>
+
+			<li>
 				<a href="{{ route('brands.index') }}">
 					<i class="fa fa-university" aria-hidden="true"></i>
 					Marcas

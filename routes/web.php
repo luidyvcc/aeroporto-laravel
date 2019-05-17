@@ -2,6 +2,11 @@
 
 // Setor administrativo
 Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
+
+    // Usuários
+    Route::any('users/search', 'UserController@search')->name('users.search');//Deve estar sempre acima das rotas resourc, get ...
+    Route::resource('users', 'UserController'); 
+
     // Marcas
     Route::any('brands/search', 'BrandController@search')->name('brands.search');//Deve estar sempre acima das rotas resourc, get ...
     Route::get('brands/{id}/planes', 'BrandController@planes')->name('brands.planes');
