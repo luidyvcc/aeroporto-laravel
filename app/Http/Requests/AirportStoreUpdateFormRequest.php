@@ -23,15 +23,17 @@ class AirportStoreUpdateFormRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->segment(5);
+
         return [
+            'name' => "required|min:3|max:150|unique:airports,name,{$id},id", 
             'city_id' => 'required|exists:cities,id', 
-            'name' => 'required|min:3|max:150', 
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
+            'latitude' => 'required|integer',
+            'longitude' => 'required|integer',
             'address' => 'required|min:3|max:150',
-            'number' => 'required|numeric',
+            'number' => 'required|integer',
             'zip_code' => 'required',
-            'complement' => 'required'
+            'complement' => 'max:191'
         ];
     }
 }
