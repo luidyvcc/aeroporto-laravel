@@ -18,4 +18,17 @@ class Reserve extends Model
         return $this->belongsTo(Flight::class); // Pertence a
     }
 
+    public function statuses($statusName = null){
+
+        $statuses = 
+        [
+            'reserved'  =>  'Reservado',
+            'canceled'  =>  'Cancelado',
+            'paid'  =>  'Pago',
+            'concluded' => 'Concluído',
+        ];
+
+        return $statusName ? $statuses[$statusName] : $statuses;
+    }
+
 }
