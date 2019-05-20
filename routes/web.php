@@ -1,11 +1,7 @@
 <?php
 
 // Setor administrativo
-Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
-
-    // Usuários
-    Route::any('users/search', 'UserController@search')->name('users.search');//Deve estar sempre acima das rotas resourc, get ...
-    Route::resource('users', 'UserController'); 
+Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {    
 
     // Marcas
     Route::any('brands/search', 'BrandController@search')->name('brands.search');//Deve estar sempre acima das rotas resourc, get ...
@@ -34,6 +30,16 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     // Aeroportos
     Route::any('city/{id}/airports/search', 'AirportController@search')->name('city.airports.search');
     Route::resource('city/{id}/airports', 'AirportController');
+
+    // Usuários
+    Route::any('users/search', 'UserController@search')->name('users.search');//Deve estar sempre acima das rotas resourc, get ...
+    Route::resource('users', 'UserController', [
+        'except' => ['show', 'destroy']
+    ]); 
+
+    // Reservas
+    Route::any('reserves/search', 'ReserveController@search')->name('reserves.search');//Deve estar sempre acima das rotas resourc, get ...
+    Route::resource('reserves', 'ReserveController'); 
 });
 
 
