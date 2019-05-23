@@ -57,7 +57,16 @@ class ReserveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $insert = $this->reserve->create( $request->all() );
+
+        return ($insert) ?
+            redirect()
+                ->route('reserves.index')
+                ->with('success', 'Cadastrado com sucesso!'):
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao cadastrar!')
+                ->withInput();//Volta a pagina com as informações preenchidas
     }
 
     /**
@@ -79,7 +88,16 @@ class ReserveController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reserve = $this->reserve->with(['user', 'flight'])->find($id);
+        if(!$reserve) return redirect()->back()->with('error', 'Falha ao atualizar');
+        
+        $user = $reserve->user;
+        $flight = $reserve->flight;
+        $statuses = $this->reserve->statuses();
+        
+        $title = "Editar reserva {$reserve->id} do usuário {$user->name}";
+
+        return view('panel.reserves.edit', compact('reserve', 'user', 'flight', 'title', 'statuses'));
     }
 
     /**
@@ -91,7 +109,18 @@ class ReserveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reserve = $this->reserve->find($id);
+        if(!$reserve) return redirect()->back()->with('error', 'Falha ao atualizar');
+
+        $updateStatus = $reserve->updateStatus($request->status);
+
+        return $updateStatus ?
+            redirect()
+                ->route('reserves.index')
+                ->with('success', 'Atualizado com sucesso!') :
+            redirect()
+                ->back()
+                ->with('error', 'Falha ao atualizar!');
     }
 
     /**

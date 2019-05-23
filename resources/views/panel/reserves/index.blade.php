@@ -42,11 +42,12 @@
     <table class="table table-striped">
         <tr>
             <th>Id</th>
+            <th>Data Reserva</th>
             <th>Usuário</th>
             <th>Voo</th>
             <th>Origem</th>
             <th>Destino</th>
-            <th>Reserva</th>
+            <th>Data Voo</th>
             <th>Status</th>
             <th width="150">Ações</th>
         </tr>
@@ -54,12 +55,13 @@
         @forelse ($reserves as $reserve)
             <tr>
                 <td>{{ $reserve->id }}</td>
+                <td>{{ formatDate($reserve->date_reserved) }}</td>
                 <td>{{ $reserve->user->name }}</td>
                 <td>{{ $reserve->flight->id }}</td>
                 <td>{{ $reserve->flight->origin->name }}</td>
                 <td>{{ $reserve->flight->destination->name }}</td>
-                <td>{{ formatDate($reserve->date_reserved) }}</td>
-                <td>{{ $reserve->status }}</td>
+                <td>{{ formatDate($reserve->flight->date) }}</td>
+                <td>{{ $reserve->statuses($reserve->status) }}</td>
                 <td>                    
                     <a href="{{ route('reserves.edit', $reserve->id) }}" class="edit">
                         Editar
