@@ -33,9 +33,10 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
     // Usuários
     Route::any('users/search', 'UserController@search')->name('users.search');//Deve estar sempre acima das rotas resourc, get ...
-    Route::resource('users', 'UserController', [
-        'except' => ['show', 'destroy']
-    ]); 
+    // Route::resource('users', 'UserController', [
+    //     'except' => ['show', 'destroy']
+    // ]); 
+    Route::resource('users', 'UserController');
 
     // Reservas
     Route::any('reserves/search', 'ReserveController@search')->name('reserves.search');//Deve estar sempre acima das rotas resourc, get ...

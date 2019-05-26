@@ -30,7 +30,16 @@ class ReserveController extends Controller
 
         $reserves = $this->reserve->with(['user', 'flight.destination', 'flight.origin'])->paginate($this->totalPage);
 
-        return view('panel.reserves.index', compact('title', 'reserves'));
+        $flights = Flight::pluck('id', 'id');
+        $flights->prepend('Todos Voos', '');
+
+        $users = User::pluck('name', 'id');
+        $users->prepend('Todos Usuários', '');
+
+        $statuses = $this->reserve->statuses();
+        $statuses[null] = 'Todos Status';
+
+        return view('panel.reserves.index', compact('title', 'reserves', 'flights', 'users', 'statuses' ));
     }
 
     /**
@@ -132,5 +141,25 @@ class ReserveController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $title = "Resultado da Pesquisa";
+
+        $reserves = $this->reserve->search($request, $this->totalPage);
+
+        $flights = Flight::pluck('id', 'id');
+        $flights->prepend('Todos Voos', '');
+
+        $users = User::pluck('name', 'id');
+        $users->prepend('Todos Usuários', '');
+
+        $statuses = $this->reserve->statuses();
+        $statuses[null] = 'Todos Status';
+
+        $searchForm = $request->except(['_token']);
+
+        return view('panel.reserves.index', compact('title', 'reserves', 'flights', 'users', 'statuses', 'searchForm' ));
     }
 }

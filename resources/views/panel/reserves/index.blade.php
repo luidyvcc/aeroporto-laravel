@@ -13,18 +13,16 @@
 
 <div class="content-din bg-white">    
 
-    <div class="form-search">
-        {!! Form::open(['route' => 'reserves.search', 'class' => 'form form-inline']) !!}
-            {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Reserva']) !!}
+    @include('panel.reserves.form-search')
 
-            <button class="btn btn-search">Pesquisar</button>
-        {!! Form::close() !!}
-    </div>
-
-    @if (isset($searchForm['key_search']))
+    @if (isset($searchForm))
         <div class="alert alert-info">
-            <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-            <p>Resultado para <strong>{{ $searchForm['key_search'] }}</strong></p>
+            <p>
+                <a href="{{ route('reserves.index') }}">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </a>
+                Resultado da pesquisa
+            </p>
         </div>
     @endif
 
