@@ -67,6 +67,17 @@ class Flight extends Model
         return $this->belongsTo(Airport::class, 'airport_destination_id');
     }
 
+    public function plane()
+    {
+        return $this->belongsTo(Plane::class);
+    }
+
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class) // tem muitas
+            ->where('reserves.status', 'NOT LIKE', 'canceled'); 
+    }
+
     public function search($request, $totalPage = 10)
     {
         $flights = $this->where(function($query) use($request) {

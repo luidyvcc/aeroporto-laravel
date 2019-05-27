@@ -67,7 +67,6 @@ class ReserveController extends Controller
      */
     public function store(ReserveStoreFormRequest $request)
     {
-        dd('AAA');
         $insert = $this->reserve->create( $request->all() );
 
         return ($insert) ?
