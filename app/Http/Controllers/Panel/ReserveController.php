@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReserveStoreFormRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Reserve;
 use App\Models\Flight;
@@ -61,11 +62,12 @@ class ReserveController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ReserveStoreFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReserveStoreFormRequest $request)
     {
+        dd('AAA');
         $insert = $this->reserve->create( $request->all() );
 
         return ($insert) ?
