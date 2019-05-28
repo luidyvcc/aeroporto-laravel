@@ -17,16 +17,27 @@ function formatPrice($value, $decimals = 2, $dec_point = ',', $thousands_sep = '
     return "R$ ".number_format($value,$decimals,$dec_point,$thousands_sep);
 }
 
-function getInfoAirport($value, $info = 'id')
+function getInfoAirport($value, $info = null)
 {
-    $dataAirport = explode(' - ',$value);
-    $id = $dataAirport[0];
-    $cityName = explode(' / ',$dataAirport[1])[0];
-    $AirportName = explode(' / ',$dataAirport[1])[1];
+    if (!isset($value) || $value==null) return null;
 
-    if ( $info == 'id' ) $return = $id;
-    if ( $info == 'cityName' ) $return = $cityName;
-    if ( $info == 'AirportName' ) $return = $AirportName;
+    $dataAirport1 = explode(' - ',$value);
+    $airportId = $dataAirport1[0];
+    
+    $dataAirport2 = explode(' / ',$dataAirport1[1]);
+    $cityName = $dataAirport2[0];
+    $airportName = $dataAirport2[1];
+
+    $dataFull = [
+        'airportId' => $airportId,
+        'cityName' => $cityName,
+        'airportName' => $airportName,
+    ];
+    
+    if ( $info == 'airportId' ) $return = $airportId;
+    elseif ( $info == 'cityName' ) $return = $cityName;
+    elseif ( $info == 'airportName' ) $return = $airportName;
+    else $return = $dataFull;
 
     return $return;
 }

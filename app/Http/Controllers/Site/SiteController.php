@@ -29,14 +29,21 @@ class SiteController extends Controller
     {
         $title = 'Resultado da pesquisa';
 
-        $request['origin'] = getInfoCity($request->origin);
-        $request['destination'] = getInfoCity($request->destination);
+        $origin = getInfoAirport($request->origin);
+        $destination = getInfoAirport($request->destination);
+
+        $request['origin'] = $origin['airportId'];
+        $request['destination'] = $destination['airportId'];
 
         $flights = $flight->search($request);
 
-        dd($flights);
-
-        return view( 'site.flights.results.search', compact( 'title', 'flights' ) );
+        return view( 'site.flights.index', [
+            'title' => $title,
+            'flights' => $flights,
+            'city_origin' =>  $origin['cityName'],
+            'city_destination' =>  $destination['cityName'],
+            'flight_date' => formatDate($request->date)
+        ] );
         
     }
 }
