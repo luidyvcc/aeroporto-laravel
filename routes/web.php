@@ -46,6 +46,9 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
 // Site
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
+
+Route::post('voos/pesquisa', 'Site\SiteController@search')->name('site.flights.search');
+
 Route::get('/', 'Site\SiteController@index')->name('home');
 
 Auth::routes();
