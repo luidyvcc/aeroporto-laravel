@@ -25,10 +25,14 @@
                 <article class="result-search col-12">
 
                     <span>Aeroporto Origem: <strong>{{ $flight->origin->name }}</strong></span>
+
                     <span>Saída: <strong>{{ formatTime($flight->hour_output) }}</strong></span>
+
                     <span>Chegada: <strong>{{ formatTime($flight->arrival_time) }}</strong></span>
+
                     <span>Paradas: <strong>{{ $flight->qty_stops }}</strong></span>
-                    <a href="?pg=compras">Comprar</a>
+
+                    <a href="{{ route('site.flights.show', [$flight->id]) }}">Detalhes</a>
 
                 </article><!--result-search-->
             @empty

@@ -25,7 +25,7 @@ class SiteController extends Controller
         return view('site.promotions.list', compact('title'));
     }
 
-    public function search(Request $request, Flight $flight)
+    public function flightSearch(Request $request, Flight $flight)
     {
         $title = 'Resultado da pesquisa';
 
@@ -45,5 +45,15 @@ class SiteController extends Controller
             'flight_date' => formatDate($request->date)
         ] );
         
+    }
+
+    public function flightShow($flightId)
+    {
+        $flight = Flight::with(['origin','destination'])->find($flightId);
+        if( !$flight ) return redirect()->back()->with('error', 'Falha ao atualizar!');
+
+        $title = "Voo {$flight->id}";
+
+        return view('site.flights.show', compact('flight', 'title'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-// Setor administrativo
+// Painel Admin
 Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {    
 
     // Marcas
@@ -43,11 +43,14 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::resource('reserves', 'ReserveController'); 
 });
 
-
 // Site
+Route::group(['middleware' => 'auth'], function () { 
+    Route::get('voos/detalhes/{id}', 'Site\SiteController@flightShow')->name('site.flights.show');
+});
+
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
 
-Route::post('voos/pesquisa', 'Site\SiteController@search')->name('site.flights.search');
+Route::post('voos/pesquisa', 'Site\SiteController@flightSearch')->name('site.flights.search');
 
 Route::get('/', 'Site\SiteController@index')->name('home');
 
