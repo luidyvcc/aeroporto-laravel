@@ -5,36 +5,50 @@
 <div class="content">
 
     <section class="container">
+
         <h1 class="title">Promoções</h1>
 
-
         <div class="row">
-            @for($i =0; $i < 20; $i++):
+
+            @forelse ($flightsPromotion as $flight)
+
                 <article class="result col-lg-3 col-md-4 col-sm-6 col-12">
+
                     <div class="image-promo">
-                        <img src="{{ url('assets/site/images/buenos_aires.jpg') }}" alt="">
+
+                        @if ( $flight->image )
+                            <img src="{{ url("storage/flights/{$flight->image}") }}" alt="{{ $flight->id }}">
+                        @else
+                            <img src="{{ url("assets/panel/imgs/no-image.jpg") }}" alt="{{ $flight->id }}">
+                        @endif
 
                         <div class="legend">
-                            <h1>Brasília</h1>
-                            <h2>Saída: Goiânia</h2>
-                            <span>Ida e Volta</span>
+                            <h1>{{ $flight->destination->city->name }}</h1>
+                            <h2>Saída: {{ $flight->origin->city->name }}</h2>
+                            <span>As: {{ formatDate($flight->date) }}</span>
                         </div>
                     </div><!--image-promo-->
 
                     <div class="details">
-                        <p>Data: 12/12/2018</p>
 
                         <div class="price">
-                            <span>R$ 259,00</span>
-                            <strong>Em até 6x</strong>
+                            <span>{{ formatPrice($flight->price) }}</span>
+                            <strong>Em até {{ $flight->total_plots }}x</strong>
                         </div>
 
-                        <a href="" class="btn btn-buy">Comprar</a>
+                        <a href="{{ route('site.flights.show', $flight->id) }}" class="btn btn-buy">Detalhes</a> 
+
                     </div><!--details-->
 
                 </article><!--result-->
-            @endfor;
+            @empty
+
+                <h2>Sem promoções no momento.</h2>
+                
+            @endforelse
+
         </div><!--Row-->
+
     </section><!--Container-->
 
 </div>

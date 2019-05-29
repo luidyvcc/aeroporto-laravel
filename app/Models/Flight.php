@@ -51,7 +51,7 @@ class Flight extends Model
         $data = $request->all();
         // $data['airport_origin_id'] = $request['origin'];
         // $data['airport_destination_id'] = $request['destination'];
-        $data['is_promotion'] = $request['is_promotion']=='on'?1:0;
+        //$data['is_promotion'] = $request['is_promotion']=='on'?1:0;
         $data['image'] = $nameFile;
 
         return $this->update($data);
@@ -96,4 +96,13 @@ class Flight extends Model
     // {
     //     return Carbon::parse($value)->format('d/m/Y');
     // }
+
+    public function getFlightsPromotion()
+    {
+        return $this
+                ->with(['origin','destination'])
+                ->where('is_promotion', true)
+                ->where('date', '>=', date('Y-m-d H:m:s'))
+                ->get();
+    }
 }
