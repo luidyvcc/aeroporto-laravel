@@ -7,6 +7,7 @@
     <section class="container">
         <h1 class="title">{{ $title or 'Erro no titulo' }}</h1>
 
+        @include('panel.includes.errors')
 
         <ul class="list-group">
 
@@ -76,22 +77,25 @@
             </li>
 
         </ul>
+        
+        {!! Form::open(['route' => 'site.flights.reserve']) !!} 
+
+            {!! Form::hidden('user_id', auth()->user()->id) !!}
+
+            {!! Form::hidden('flight_id', $flight->id) !!}
+
+            {!! Form::hidden('date_reserved', date('Y-m-d H:m:s')) !!}
+
+            {!! Form::hidden('status', 'reserved') !!}
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Reservar</button>
+            </div>
+
+        {!! Form::close() !!}
+
     </section><!--Container-->
 
 </div>
-
-
-
-
-    {{-- {!! Form::open(['route' => ['flights.destroy', $flight->id],
-                    'class' => 'form form-search form-ds',
-                    'method' => 'delete']) !!} 
-
-        <div class="form-group">
-            <button class="btn btn-danger">Deletar</button>
-        </div>
-
-    {!! Form::close() !!} --}}
-
    
 @endsection

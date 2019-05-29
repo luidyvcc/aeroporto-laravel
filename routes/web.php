@@ -46,6 +46,9 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 // Site
 Route::group(['middleware' => 'auth'], function () { 
     Route::get('voos/detalhes/{id}', 'Site\SiteController@flightShow')->name('site.flights.show');
+    Route::post('voos/reserve', 'Site\SiteController@flightReserve')->name('site.flights.reserve');
+
+    Route::get('usuario/minhas-compras', 'Site\SiteController@myPurchaces')->name('site.user.purchaces');
 });
 
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');

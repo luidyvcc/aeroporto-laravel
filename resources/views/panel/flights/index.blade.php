@@ -54,8 +54,8 @@
 
     <table class="table table-striped">
         <tr>
+            <th>Img.</th>
             <th>Id</th>
-            <th>Imagem</th>
             <th>Origem</th>
             <th>Destino</th>
             <th>Paradas</th>
@@ -66,15 +66,19 @@
 
         @forelse ($flights as $flight)
             <tr>
-                <td>{{ $flight->id }}</td>
 
                 <td>
                     @if ( $flight->image )
-                        <img src="{{ url("storage/flights/{$flight->image}") }}" alt="{{ $flight->id }}" style="max-width: 60px;">
+                        <img src="{{ url("storage/flights/{$flight->image}") }}"
+                        alt="{{ $flight->id }}" style="width: 35px;" class="img-rounded">
                     @else
-                        <img src="{{ url("assets/panel/imgs/no-image.jpg") }}" alt="{{ $flight->id }}" style="max-width: 60px;">
+                        <img src="{{ url("assets/panel/imgs/no-image.jpg") }}"
+                        alt="{{ $flight->id }}" style="width: 35px;" class="img-rounded">
                     @endif
                 </td>
+
+                <td>{{ $flight->id }}</td>
+
 
                 <td>
                     <a href="">{{ $flight->origin->name }}</a>

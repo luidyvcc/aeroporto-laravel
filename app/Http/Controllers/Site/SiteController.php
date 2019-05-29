@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Flight;
 use App\Models\Airport;
+use App\Models\Reserve;
+use App\Http\Requests\ReserveStoreFormRequest;
 
 class SiteController extends Controller
 {
@@ -56,4 +58,24 @@ class SiteController extends Controller
 
         return view('site.flights.show', compact('flight', 'title'));
     }
+
+    public function flightReserve(ReserveStoreFormRequest $request, Reserve $reserve)
+    {
+        $insert = $reserve->siteSaveReserve($request->flight_id);
+
+        return ($insert) ?
+        redirect()
+            ->route('site.user.purchaces')
+            ->with('success', 'Cadastrado com sucesso!'):
+        redirect()
+            ->back()
+            ->with('error', 'Falha ao cadastrar!')
+            ->withInput();//Volta a pagina com as informações preenchidas
+    }
+
+    public function myPurchaces()
+    {
+        dd('Minhas compras');
+    }
+
 }
