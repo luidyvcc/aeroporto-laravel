@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
+use App\Models\Reserve;
 
 class User extends Authenticatable
 {
@@ -79,5 +80,10 @@ class User extends Authenticatable
 
 
         return $this->save();
+    }
+
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class);
     }
 }

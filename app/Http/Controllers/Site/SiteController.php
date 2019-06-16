@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\User;
 use App\Models\Flight;
 use App\Models\Airport;
 use App\Models\Reserve;
@@ -68,7 +69,7 @@ class SiteController extends Controller
 
         return ($insert) ?
         redirect()
-            ->route('site.user.purchaces')
+            ->route('site.user.purchases')
             ->with('success', 'Cadastrado com sucesso!'):
         redirect()
             ->back()
@@ -76,9 +77,14 @@ class SiteController extends Controller
             ->withInput();//Volta a pagina com as informações preenchidas
     }
 
-    public function myPurchaces()
+    public function myPurchases(User $user)
     {
-        dd('Minhas compras');
+        $title = "Minhas reservas";
+
+        $reserves = auth()->user()->reserves()->orderBy('date_reserved', 'DESC')->get();
+        if( !$reserves ) return redirect()->back()->with('error', 'Falha ao atualizar!');
+
+        return view('site.users.purchases', compact('title', 'reserves'));
     }
 
 }

@@ -61,10 +61,19 @@
                                 Nome Usuário
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                                 <a class="dropdown-item" href="?pg=meu-perfil">Meu Perfil</a>
-                                <a class="dropdown-item" href="?pg=compras">Minhas Compras</a>
+
+                                <a class="dropdown-item" href="{{ route('site.user.purchases') }}">
+                                    Minhas Compras
+                                </a>
+
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="">Sair</a>
+
+                                <a class="dropdown-item" href="">
+                                    Sair
+                                </a>
+
                             </div>
                         </div>
                     </div><!-- main-user-auth -->
