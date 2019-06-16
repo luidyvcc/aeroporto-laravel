@@ -13,6 +13,14 @@ use App\Http\Requests\ReserveStoreFormRequest;
 
 class SiteController extends Controller
 {
+
+    private $totalPage;
+
+    public function __construct()
+    {
+        $this->totalPage = 4;
+    }
+
     public function index()
     {
         $title = 'Principal';
@@ -56,7 +64,7 @@ class SiteController extends Controller
     public function flightShow($flightId)
     {
         $flight = Flight::with(['origin','destination'])->find($flightId);
-        if( !$flight ) return redirect()->back()->with('error', 'Falha ao atualizar!');
+        if( !$flight ) return redirect()->back()->with('error', 'Falha ao localizar!');
 
         $title = "Voo {$flight->id}";
 
@@ -77,14 +85,30 @@ class SiteController extends Controller
             ->withInput();//Volta a pagina com as informações preenchidas
     }
 
-    public function myPurchases(User $user)
+    public function myPurchases()
     {
         $title = "Minhas reservas";
 
-        $reserves = auth()->user()->reserves()->orderBy('date_reserved', 'DESC')->get();
-        if( !$reserves ) return redirect()->back()->with('error', 'Falha ao atualizar!');
+        $reserves = auth()->user()->userReservations();
+        if( !$reserves ) return redirect()->back()->with('error', 'Falha ao localizar!');
 
         return view('site.users.purchases', compact('title', 'reserves'));
+    }
+
+    public function detailPurchases($flightId)
+    {
+        $reserve = Reserve::with(['flight'])
+        ->where('user_id', auth()->user()->id)
+        ->where('flight_id', $flightId)
+        ->get()->first();
+        if( !$reserve ) return redirect()->back()->with('error', 'Falha ao localizar!');
+
+        $flight = Flight::with(['origin','destination'])->find($reserve->flight->id);
+        if( !$flight ) return redirect()->back()->with('error', 'Falha ao localizar!');
+
+        $title = "Voo {$flight->id}";
+
+        return view('site.users.detail-purchase', compact('flight', 'title'));
     }
 
 }

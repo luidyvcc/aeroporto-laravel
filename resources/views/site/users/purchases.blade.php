@@ -16,7 +16,7 @@
                     <th>Vôo</th>
                     <th>Data</th>
                     <th width="100">Status</th>
-                    <th width="130">Cancelar</th>
+                    {{-- <th width="130">Cancelar</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@
                     <td> {{ $reserve->id }} </td>
 
                     <td>
-                        <a href="{{ route('site.flights.show', $reserve->flight_id) }}" class="badge badge-light">
+                        <a href="{{ route('site.user.purchase.detail', $reserve->flight_id) }}" class="badge badge-light">
                             Ver Detalhes Voô: {{ $reserve->flight_id }}
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                         </a>
@@ -40,11 +40,11 @@
                             {{ $reserve->statuses($reserve->status) }}
                         </span>
                     </td>
-                    <td>
+                    {{-- <td>
                         <a href="" class="btn btn-sm btn-danger">
                             Cancelar <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
-                    </td>
+                    </td> --}}
                 </tr>
 
                 @empty

@@ -86,4 +86,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reserve::class);
     }
+
+    public function userReservations($totalPage = 10)
+    {
+        $reserves = Reserve::        
+            join('users', 'users.id', '=', 'reserves.user_id')
+            ->join('flights', 'flights.id', '=', 'reserves.flight_id')
+            ->select(
+                'reserves.*',
+                'users.name AS user_name',
+                'users.email AS user_email',
+                'flights.date AS flight_date',
+            )
+            ->where('users.id', $this->id)    
+            ->orderBy('reserves.date_reserved', 'DESC')      
+            ->get();
+
+        return $reserves;
+    }
 }

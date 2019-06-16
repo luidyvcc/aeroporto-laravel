@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('voos/reserve', 'Site\SiteController@flightReserve')->name('site.flights.reserve');
 
     Route::get('usuario/minhas-compras', 'Site\SiteController@myPurchases')->name('site.user.purchases');
+    Route::get('usuario/detalhe-compra/{id}', 'Site\SiteController@detailPurchases')->name('site.user.purchase.detail');
 });
 
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
