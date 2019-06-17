@@ -12,7 +12,7 @@
         </div>
 
         <div class="">
-            {!! Form::model( auth()->user(), ['route' => 'site.user.update', 'class' => 'form-eti'] ) !!} 
+            {!! Form::model( auth()->user(), ['route' => 'site.user.update', 'files' => true, 'class' => 'form-eti'] ) !!} 
         
                 <div class="form-group">
                     <label for="name">Nome *</label>

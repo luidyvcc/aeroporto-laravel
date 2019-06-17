@@ -194,9 +194,26 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = auth()->user();
+
         $user->name = $request->name;
 
-        if( $request->password ) $user->password = bcrypt($request->password);
+        if ( $request->password ) $user->password = bcrypt($request->password);
+
+        if ( $request->hasFile('image') && $request->file('image')->isValid() ) {
+
+            if ( $user->image ) $nameFile = $user->image;
+            else $nameFile = $user->id.'_'.$user->name.'.'.$request->image->extension();
+
+            if ( !$request->image->storeAs('users', $nameFile) ) {
+                return 
+                redirect()
+                ->back()
+                ->with('error', 'Falha ao carregar imagem!');
+            }else{
+                $user->image = $nameFile;
+            }
+
+        }
 
         $update = $user->save();
 
