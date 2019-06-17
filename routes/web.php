@@ -45,21 +45,26 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
 // Site
 Route::group(['middleware' => 'auth'], function () { 
+   
+    Route::get('usuario/meu-perfil', 'Panel\UserController@myProfile')->name('site.user.profile');
+    Route::post('usuario/atualizar-perfil', 'Panel\UserController@updateProfile')->name('site.user.update');
+    
     Route::get('voos/detalhes/{id}', 'Site\SiteController@flightShow')->name('site.flights.show');
     Route::post('voos/reserve', 'Site\SiteController@flightReserve')->name('site.flights.reserve');
 
     Route::get('usuario/minhas-compras', 'Site\SiteController@myPurchases')->name('site.user.purchases');
-
-    Route::get('usuario/meu-perfil', 'Panel\UserController@myProfile')->name('site.user.profile');
-    Route::put('usuario/atualizar-perfil/{id}', 'Panel\UserController@updateProfile')->name('update.profile');
-    
     Route::get('usuario/detalhe-compra/{id}', 'Site\SiteController@detailPurchases')->name('site.user.purchase.detail');
+    
 });
 
-Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
+Route::group(['namespace' => 'Site'], function () {  
 
-Route::post('voos/pesquisa', 'Site\SiteController@flightSearch')->name('site.flights.search');
-
-Route::get('/', 'Site\SiteController@index')->name('home');
+    Route::get('promocoes', 'SiteController@promotions')->name('promotions');
+    
+    Route::post('voos/pesquisa', 'SiteController@flightSearch')->name('site.flights.search');
+    
+    Route::get('/', 'SiteController@index')->name('home');
+    
+});
 
 Auth::routes();

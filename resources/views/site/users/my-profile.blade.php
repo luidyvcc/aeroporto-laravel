@@ -7,9 +7,12 @@
     <section class="container">
         <h1 class="title">Meu Perfil</h1>
 
+        <div class="messenges">
+            @include('panel.includes.alerts')
+        </div>
 
         <div class="">
-            {!! Form::model($user, ['route' => ['update.profile', $user->id], 'class' => 'form-eti', 'files' => true, 'method' => 'PUT']) !!} 
+            {!! Form::model( auth()->user(), ['route' => 'site.user.update', 'class' => 'form-eti'] ) !!} 
         
                 <div class="form-group">
                     <label for="name">Nome *</label>
@@ -21,11 +24,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-Mail *</label>
+                    <label for="email">E-Mail</label>
 
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) !!}
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'disabled']) !!}
                     </div>
                 </div>
 
@@ -34,7 +37,7 @@
 
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
-                    {!! Form::file('image', null, ['class' => 'form-control']) !!}
+                    {!! Form::file('image', ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
@@ -43,7 +46,7 @@
 
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
-                    {!! Form::password('password', null, ['class' => 'form-control', 'placeholder' => '(Opcional) Informe Apenas se Quiser Atualizar a Senha']) !!}
+                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '(Opcional) Informe Apenas se Quiser Atualizar a Senha']) !!}
                     </div>
                 </div>
 
