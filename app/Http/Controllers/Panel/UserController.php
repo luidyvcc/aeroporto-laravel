@@ -181,4 +181,19 @@ class UserController extends Controller
 
         return view('panel.users.index', compact('title','users', 'searchForm'));
     }
+
+    public function myProfile()
+    {
+        $title = "Meu perfil";
+
+        $user = auth()->user();
+
+        return view("site.users.my-profile", compact('title', 'user'));
+    }
+
+    public function updateProfile(UserStoreUpdateFormRequest $request, $id)
+    {
+        dd("Sucesso");
+    }
+
 }

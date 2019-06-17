@@ -49,7 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('voos/reserve', 'Site\SiteController@flightReserve')->name('site.flights.reserve');
 
     Route::get('usuario/minhas-compras', 'Site\SiteController@myPurchases')->name('site.user.purchases');
-    Route::get('usuario/meu-perfil', 'Site\SiteController@myProfile')->name('site.user.profile');
+
+    Route::get('usuario/meu-perfil', 'Panel\UserController@myProfile')->name('site.user.profile');
+    Route::put('usuario/atualizar-perfil/{id}', 'Panel\UserController@updateProfile')->name('update.profile');
     
     Route::get('usuario/detalhe-compra/{id}', 'Site\SiteController@detailPurchases')->name('site.user.purchase.detail');
 });
