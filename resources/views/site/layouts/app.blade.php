@@ -35,7 +35,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="?pg=home">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ url('assets/site/images/logo.png') }}" alt="" class="img-menu">
                 </a>
                 <div class="collapse navbar-collapse">
@@ -48,21 +48,27 @@
                         </li>
                     </ul>
                 </div><!--collapse-->
-                @if(false):
+                @if( !auth()->check() ):
                     <div class="main-auth">
-                        <a href="#" class="sign">ENTRAR</a>
-                        <a href="#" class="signup efect-transition">CADASTRE-SE</a>
+                        <a href="{{ route('sign') }}" class="sign">ENTRAR</a>
+                        <a href="{{ route('signup') }}" class="signup efect-transition">CADASTRE-SE</a>
                     </div>
                 @else
                     <div class="main-user-auth">
                         <div class="dropdown">
+
                             <a href="#" class="dropdown-toggle user-auth" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ url('assets/site/images/no-image.png') }}" alt="" class="img-header-user">
-                                Nome Usuário
+                                @if ( auth()->user()->image )
+                                    <img src="{{ url("storage/users/{auth()->user()->image}") }}" alt="imagem do {{ auth()->user()->name }}" style="width: 35px;" class="img-rounded">
+                                @else
+                                    <img src="{{ url('storage/users/no-image.jpg') }}" alt="sem imagem do usuário" style="width: 35px;" class="img-rounded">
+                                @endif
+                                {{ auth()->user()->name }}
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="?pg=meu-perfil">Meu Perfil</a>
+                                <a class="dropdown-item" href="{{ route('site.user.profile') }}">Meu Perfil</a>
 
                                 <a class="dropdown-item" href="{{ route('site.user.purchases') }}">
                                     Minhas Compras

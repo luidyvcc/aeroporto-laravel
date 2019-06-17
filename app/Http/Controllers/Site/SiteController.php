@@ -95,6 +95,11 @@ class SiteController extends Controller
         return view('site.users.purchases', compact('title', 'reserves'));
     }
 
+    public function myProfile()
+    {
+        dd('Meu perfil');
+    }
+
     public function detailPurchases($flightId)
     {
         $reserve = Reserve::with(['flight'])
