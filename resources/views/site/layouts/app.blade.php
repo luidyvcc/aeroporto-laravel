@@ -55,11 +55,12 @@
                     </div>
                 @else
                     <div class="main-user-auth">
+                        
                         <div class="dropdown">
 
                             <a href="#" class="dropdown-toggle user-auth" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if ( auth()->user()->image )
-                                    <img src="{{ url("storage/users/{auth()->user()->image}") }}" alt="imagem do {{ auth()->user()->name }}" style="width: 35px;" class="img-rounded">
+                                    <img src="{{ url('storage/users/'.auth()->user()->image) }}" alt="imagem do {{ auth()->user()->name }}" style="width: 35px;" class="img-rounded">
                                 @else
                                     <img src="{{ url('storage/users/no-image.jpg') }}" alt="sem imagem do usuário" style="width: 35px;" class="img-rounded">
                                 @endif
