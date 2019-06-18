@@ -50,8 +50,8 @@
                 </div><!--collapse-->
                 @if( !auth()->check() ):
                     <div class="main-auth">
-                        <a href="{{ route('sign') }}" class="sign">ENTRAR</a>
-                        <a href="{{ route('signup') }}" class="signup efect-transition">CADASTRE-SE</a>
+                        <a href="{{ route('home') }}" class="sign">ENTRAR</a>
+                        <a href="{{ route('home') }}" class="signup efect-transition">CADASTRE-SE</a>
                     </div>
                 @else
                     <div class="main-user-auth">
@@ -77,7 +77,7 @@
 
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{ route('logout') }}">
                                     Sair
                                 </a>
 

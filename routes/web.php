@@ -45,6 +45,8 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
 // Site
 Route::group(['middleware' => 'auth'], function () { 
+
+    Route::get('logout', 'Panel\UserController@logout')->name('user.logout');
    
     Route::get('usuario/meu-perfil', 'Panel\UserController@myProfile')->name('site.user.profile');
     Route::post('usuario/atualizar-perfil', 'Panel\UserController@updateProfile')->name('site.user.update');
