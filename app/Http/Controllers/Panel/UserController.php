@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\UserStoreUpdateFormRequest;
+use App\Http\Requests\UserUpdateProfileFormRequest;
+
 
 class UserController extends Controller
 {
@@ -191,7 +193,7 @@ class UserController extends Controller
         return view("site.users.my-profile", compact('title', 'user'));
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UserUpdateProfileFormRequest $request)
     {
         $user = auth()->user();
 
@@ -202,7 +204,7 @@ class UserController extends Controller
         if ( $request->hasFile('image') && $request->file('image')->isValid() ) {
 
             if ( $user->image ) $nameFile = $user->image;
-            else $nameFile = $user->id.'_'.$user->name.'.'.$request->image->extension();
+            else $nameFile = $user->id.'_'.kebab_case($user->name).'.'.$request->image->extension();
 
             if ( !$request->image->storeAs('users', $nameFile) ) {
                 return 

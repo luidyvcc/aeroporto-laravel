@@ -9,6 +9,7 @@
 
         <div class="messenges">
             @include('panel.includes.alerts')
+            @include('panel.includes.errors')
         </div>
 
         <div class="">
