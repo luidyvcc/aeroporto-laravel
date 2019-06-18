@@ -1,7 +1,11 @@
 <?php
 
 // Painel Admin
-Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {    
+Route::group([
+    'prefix' => 'panel',
+    'namespace' => 'Panel',
+    'middleware' => ['auth', 'auth.admin']
+], function () {    
 
     // Marcas
     Route::any('brands/search', 'BrandController@search')->name('brands.search');//Deve estar sempre acima das rotas resourc, get ...

@@ -50,8 +50,8 @@
                 </div><!--collapse-->
                 @if( !auth()->check() ):
                     <div class="main-auth">
-                        <a href="{{ route('home') }}" class="sign">ENTRAR</a>
-                        <a href="{{ route('home') }}" class="signup efect-transition">CADASTRE-SE</a>
+                        <a href="{{ route('login') }}" class="sign">ENTRAR</a>
+                        <a href="{{ route('register') }}" class="signup efect-transition">CADASTRE-SE</a>
                     </div>
                 @else
                     <div class="main-user-auth">
