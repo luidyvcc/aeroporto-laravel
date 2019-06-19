@@ -7,26 +7,28 @@
 </div>
 
 <div class="title-pg">
-    <h1 class="title-pg">Home Page</h1>
+    <h1 class="title-pg">Relatório</h1>
 </div>
 
 <div class="content-din">
-    
-    @for ($i = 1; $i <= 10; $i++)
-        <div class="col-md-3 col-sm-4 col-xm-12">
-            <div class="rel-dash">
-                <i class="fa fa-home" aria-hidden="true"></i>
-                <div class="text-rel">
-                    <h2 class="result">
-                        {{ $i }}
-                    </h2>
-                    <h3 class="result-ds">
-                        Total de Usuários
-                    </h3>
-                </div>
+
+    @foreach ($totais as $item)
+    <div class="col-md-3 col-sm-4 col-xm-12">
+        <div class="rel-dash">
+            <i class="{{ $item['icon'] }}" aria-hidden="true"></i>
+            <div class="text-rel">
+                <h2 class="result">
+                    {{ $item['title'] }}
+                </h2>
+                <h3 class="result-ds">
+                    Total: {{ $item['total'] }}
+                </h3>
             </div>
         </div>
-    @endfor
+    </div>
+    @endforeach
+
+
     
 </div><!--Content Dinâmico-->
     

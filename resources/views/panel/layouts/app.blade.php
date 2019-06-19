@@ -86,13 +86,19 @@
 		
 		<div class="dropdown user-dash">
 		  <div class="dropdown-toggle" id="dropDownCuston" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		    <img src="{{ url('assets/panel/imgs/user-carlos-ferreira.png') }}" alt="Carlos Ferreira" class="user-dashboard img-circle">
-		    <p class="user-name">Nome User</p>
-		    <span class="caret"></span>
+
+			@if ( auth()->user()->image )
+				<img src="{{ url('storage/users/'.auth()->user()->image) }}" alt="imagem do {{ auth()->user()->name }}" class="user-dashboard img-rounded">
+			@else
+				<img src="{{ url('storage/users/no-image.jpg') }}" alt="sem imagem do usuário" class="user-dashboard img-rounded">
+			@endif
+
+			<p class="user-name">{{ auth()->user()->name }}</p>
+			
 		  </div>
 		  <ul class="dropdown-menu dp-menu" aria-labelledby="dropDownCuston">
-		    <li><a href="#">Perfil</a></li>
-		    <li><a href="#">Logout</a></li>
+		  	<li><a href="{{ route('site.user.profile') }}">Perfil</a></li>
+		    <li><a href="{{ route('logout') }}">Logout</a></li>
 		  </ul>
 		</div>
 	</div><!--Top Dashboard-->
